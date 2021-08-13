@@ -1,0 +1,18 @@
+{
+    "dataset": "../Ressources/Datasets/GBPJPY60.csv",
+    "learningRate": 0.001,
+    "windowSize": 20,
+    "indicators": {
+        "SMA": {
+            "enabled": true;
+            "period": [30]
+            },
+        "EMA": {
+            "enabled": true,
+            "period":[50]
+            },
+        "VWAP": {
+            "enabled": true
+            }
+        }
+}
