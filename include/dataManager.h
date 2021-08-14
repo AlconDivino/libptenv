@@ -33,6 +33,8 @@
      std::vector<double> f64_low; ///<Vector with low price
      std::vector<double> f64_close; ///<Vector with close price
      std::vector<double> f64_volume; ///<Vector with volume
+
+     void cut(size_t length);
  };
 
 
@@ -49,6 +51,7 @@ public:
 
     // Loading from a csv with , delimiter
     static void readOHLCV_csv(CandleStorage* storage, const std::string &s_filename);
+
 
 private:
 

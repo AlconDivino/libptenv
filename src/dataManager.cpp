@@ -4,6 +4,25 @@
 
 #include <dataManager.h>
 
+/**
+ * @brief Cuts the vectors in the class to a specific size
+ * @param length desired size of the vector
+ */
+void CandleStorage::cut(size_t length)
+{
+    if(length == 0)
+        throw std::runtime_error("[CandleStorage] ERROR Cannot operate with data size 0");
+
+    while(f64_open.size() > length)
+    {
+        f64_open.erase(f64_open.begin());
+        f64_high.erase(f64_high.begin());
+        f64_low.erase(f64_low.begin());
+        f64_close.erase(f64_close.begin());
+        f64_volume.erase(f64_volume.begin());
+    }
+}
+
 
 /**
  * @brief Reads the settings from a json-style settings file ../envsettings.json

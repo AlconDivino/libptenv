@@ -19,7 +19,8 @@
 
 
 /**
- * @brief This class provides the environment for every
+ * @brief This class provides an Forex Environment for Reinforced AI training
+ * Functionality like Gym Enves known from python
  */
 class Environment
 {
@@ -28,12 +29,17 @@ public:
     Environment();
     ~Environment();
 
+    // take next step with action from actor
     torch::Tensor step(int action, float *reward, bool *done);
 
+    // Reset Environment
     torch::Tensor reset();
 
 
 private:
+    Settings settings; ///<Settings Object storing all user input from envsettings.json
+    CandleStorage data; ///<Storage where the OHLCV data from the File is stored
+
 
 protected:
 
