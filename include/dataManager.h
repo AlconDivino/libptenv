@@ -52,7 +52,6 @@ public:
     // Loading from a csv with , delimiter
     static void readOHLCV_csv(CandleStorage* storage, const std::string &s_filename);
 
-
 private:
 
 protected:

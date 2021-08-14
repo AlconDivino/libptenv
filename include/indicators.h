@@ -31,11 +31,15 @@ public:
     Indicators();
 
     // Setter
-    void set_ohlcvPtr(CandleStorage *in, Settings s);
+    void set_ohlcvPtr(CandleStorage *in, const Settings &s);
 
     // Calculate Indicators
     void calculateIndicators();
 
+    // Getter
+    std::vector<std::vector<double>>* getIndicators();
+
+    size_t getSize();
 
 private:
     CandleStorage *inData = nullptr; ///<Object filled with OHLCV data
