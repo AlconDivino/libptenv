@@ -41,6 +41,8 @@ public:
 
     size_t getSize();
 
+    int getNumIndicators() const;
+
 private:
     CandleStorage *inData = nullptr; ///<Object filled with OHLCV data
     std::vector<std::vector<double>> vf64_indicators; ///<Vector with pointer to double array for indicator storage

@@ -13,16 +13,18 @@
  * @param vf64_in 2d double vector to compute gafs from.
  * @param t_out Tensor to save the Data to. Same Tensor gets overwritten everytime compute_next is called
  */
-sGAF::sGAF(size_t us_startIdx, size_t us_window, dVec2D& vf64_in) : vf64_input(vf64_in)
+sGAF::sGAF(size_t us_startIdx, size_t us_window, dVec2D* vf64_in)
 {
     us_globalPos = us_startIdx;
-    us_numIndicators = vf64_in.size();
+    us_numIndicators = vf64_in->size();
     us_windowSize = us_window;
+    vf64_input = vf64_in;
 
     vf_dataOut.resize(us_windowSize * us_windowSize * us_numIndicators);
 
     // Create threads
     i_nthreads = (int)std::thread::hardware_concurrency();
+    printf("[sGAF] NOTICE Starting threads. Number of threads: %i", i_nthreads);
     for(int id = 1; id < i_nthreads; id++)
     {
         v_threads.emplace_back(sGAF::_compute,
@@ -31,7 +33,7 @@ sGAF::sGAF(size_t us_startIdx, size_t us_window, dVec2D& vf64_in) : vf64_input(v
                                &us_globalPos,
                                &us_idxIndicator,
                                us_windowSize,
-                               &vf64_input,
+                               vf64_input,
                                &vf_dataOut);
     }
 
@@ -49,7 +51,7 @@ sGAF::~sGAF()
                    &us_globalPos,
                    &us_idxIndicator,
                    us_windowSize,
-                   &vf64_input,
+                   vf64_input,
                    &vf_dataOut);
 
     for(auto & v_thread : v_threads)
@@ -77,7 +79,7 @@ float* sGAF::compute_next()
                        &us_globalPos,
                        &us_idxIndicator,
                        us_windowSize,
-                       &vf64_input,
+                       vf64_input,
                        &vf_dataOut);
 
         i_nWaiting = syncer.getWaiting();

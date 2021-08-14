@@ -138,3 +138,12 @@ size_t Indicators::getSize()
 {
     return vf64_indicators[0].size();
 }
+
+/**
+ * @brief Returns the number of indicators
+ * @return Number of indicators
+ */
+int Indicators::getNumIndicators() const
+{
+    return (int)vf64_indicators.size();
+}

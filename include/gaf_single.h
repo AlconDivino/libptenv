@@ -16,7 +16,7 @@
 // Project
 #include "threadSync.h"
 
-using dVec2D = std::vector<std::vector<float>>;
+using dVec2D = std::vector<std::vector<double>>;
 using fVec = std::vector<float>;
 using dVec = std::vector<double>;
 
@@ -31,7 +31,7 @@ class sGAF
 {
 public:
     // Constructor
-    sGAF(size_t us_startIdx, size_t us_window, dVec2D& vf64_in);
+    sGAF(size_t us_startIdx, size_t us_window, dVec2D* vf64_in);
     ~sGAF();
 
     // compute next
@@ -41,7 +41,7 @@ public:
     void setIdx(size_t idx);
 
 private:
-    dVec2D &vf64_input; ///<Reference to Input 2d double vector.
+    dVec2D *vf64_input; ///<Reference to Input 2d double vector.
     fVec vf_dataOut; ///<Storage for the output (Continuous) data_ptr is passed to tensor
     size_t us_globalPos; ///<Index on the INPUT vector to be computed
     size_t us_idxIndicator; ///<Index of the Indicator (where to store the data on the vf_dataOut)

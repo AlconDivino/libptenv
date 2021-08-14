@@ -22,6 +22,8 @@ Environment::Environment()
 
     // Cut ohlcv data to indicator length
     data.cut(indicators.getSize());
+
+    gaf = new sGAF(settings.i_windowSize, settings.i_windowSize, indicators.getIndicators());
 }
 
 Environment::~Environment()
@@ -45,12 +47,19 @@ torch::Tensor Environment::step(int action, float *reward, bool *done)
 }
 
 /**
- *
- * @return
+ * @brief Resets the environment. Trackers will be reset to initial state.
+ * @return first state of the Environment
  */
 torch::Tensor Environment::reset()
 {
-    return torch::Tensor();
+
+    us_pos = settings.i_windowSize;
+    us_step = 0;
+
+
+    return torch::from_blob(gaf->compute_next(), {1, indicators.getNumIndicators()
+                                                  ,settings.i_windowSize,
+                                                  settings.i_windowSize});
 }
 
 /**

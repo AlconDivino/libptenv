@@ -40,6 +40,7 @@ private:
     Settings settings; ///<Settings Object storing all user input from envsettings.json
     CandleStorage data; ///<Storage where the OHLCV data from the File is stored
     Indicators indicators; ///<Indicators object for calculating and storing the Indicators data
+    sGAF *gaf;
 
     // Environment tracker vars
     size_t us_pos; ///<Current idx in data and indicators. Not starting at 0 but windowSize for computation
